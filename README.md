@@ -1,121 +1,120 @@
 # NinjaNvim
 
+Configuración de Neovim 0.12+ escrita en Lua para macOS. Sustituye a VS Code en JavaScript, TypeScript, React, React Native, Laravel, PHP, Blade, Java, Go, Rust, Swift, Kotlin, CSS, Tailwind, JSON y TOML.
 
-![Logo NeoVim](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Neovim-logo.svg/1280px-Neovim-logo.svg.png)
-
-Here you found me neovim config
-
-[![Total de Lineas](https://tokei.rs/b1/github/manuelduarte077/ninja.nvim?category=lines)](https://github.com/XAMPPRocky/tokei)
-
-## Features
-
-- **Intelljsense** [NativeLSP](https://github.com/neovim/nvim-lspconfig) you can select this in the manager settings for lua native lsp [here](https://github.com/TeoDev1611/AstroVim/blob/rocket/lua/lsp/lsp-servers/init.lua) 
-
-- **Comments** The comment tool what use is [vim-commentary](https://github.com/tpope/vim-commentary) this can be activated it with gcc and gc can you see the documentation for this amazing tool in the repository all settings are the default.
-
-- **Pairs** For the pairs in the brackets i use [autopairs](https://github.com/steelsojka/pears.nvim)
-
-- **Languages Supported** Any question regarding how to set up a language can you open an issue to help you out :v:
-  - Dart
-  - Flutter
-  - Rust
-  - Go
-  - HTML
-  - CSS
-  - Python
-  - JavaScript
-  - EditorConfig **This not a language only a tool :smiley:**
-  - Json, Toml, Yaml
-
-- **File Explorer** I use the awesome asynchronus file explorer [Fern](https://github.com/lambdalisue/fern.vim) you can open this with ``<leader>n`` into the left side and ``<C-m>`` into the full screen
-
-- **Utils for the editor**
-  - ```Ctrl-ArrowKeys``` for natigate into the panels
-  - ```Space w``` for save
-  - ```Space q``` for close
-  - ```Space so``` for reload
-  - ````Tab and shift tab```` for advance and back into the buffers
-  - `````> and <````` for indent and unindent
-  - ````jk and Ctrl-c```` for go to the normal mode
-
-## Installation
-
-### Download NeoVim
-For Windows we can install the package manager [Chocolatey](https://chocolatey.org/install) this is the option that I recommend following to isntall with choco:
-
-- Install Chocolatey
-
-We can skip this step if you have installed chocolatey, you can execute this command in powershell.
+## Instalación
 
 ```bash
-choco -v
+brew install neovim ripgrep fd lazygit tree-sitter-cli openjdk@25
+git clone https://github.com/donmanueldev/ninja.nvim ~/.config/nvim
+nvim
 ```
 
-If you can install chocolatey, you can use this command in Powershell using the administrador
+Al abrir Neovim por primera vez se instalan solos los plugins, los parsers y las herramientas de Mason. Tarda unos minutos.
 
-```bash
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+También necesitas:
+
+- Una Nerd Font configurada en tu terminal, para ver los iconos.
+- `claude` en el `PATH`, para la integración con Claude Code.
+- Xcode, para Swift (LSP, formato y debug) y para depurar Rust.
+- `rustfmt` y `clippy`, para formatear y analizar Rust: `rustup component add rustfmt clippy`.
+- JDK 25, solo para el servidor de Java. Tus proyectos pueden compilar con otra versión.
+- Xdebug, solo para depurar PHP: `pecl install xdebug`.
+
+## Atajos
+
+El leader es `Espacio`. Pulsa `Espacio` y espera para ver el menú con todas las opciones, o `Espacio ?` para ver todos los atajos.
+
+### Lo esencial
+
+| Atajo | Acción |
+| --- | --- |
+| `Ctrl-p` | Buscar archivo |
+| `Espacio fg` | Buscar texto en el proyecto |
+| `Ctrl-b` / `Espacio e` | Árbol de archivos |
+| `Ctrl-s` / `Espacio w` | Guardar |
+| `Espacio q` | Cerrar ventana |
+| `Ctrl-/` | Comentar |
+| `Ctrl-n` | Multicursor en la siguiente coincidencia |
+| `Ctrl-\` / `Espacio t` | Terminal |
+| `jk` | Salir de modo inserción |
+
+### Buffers y ventanas
+
+| Atajo | Acción |
+| --- | --- |
+| `Tab` / `Shift-Tab` | Buffer siguiente / anterior |
+| `Espacio bd` / `Espacio bo` | Cerrar buffer / cerrar los demás |
+| `Espacio sv` / `Espacio sh` | Dividir en vertical / horizontal |
+| `Ctrl-h` `j` `k` `l` | Moverse entre ventanas |
+| `Shift-flechas` | Redimensionar ventana |
+| `Espacio sm` | Maximizar ventana |
+| `Espacio sx` | Cerrar ventana |
+
+### Código
+
+| Atajo | Acción |
+| --- | --- |
+| `gd` / `gr` / `gi` / `gy` | Definición / referencias / implementación / tipo |
+| `K` | Documentación |
+| `Espacio ca` | Acciones de código |
+| `Espacio cr` / `F2` | Renombrar |
+| `Espacio cf` | Formatear |
+| `Espacio cx` / `Espacio cX` | Problemas del archivo / del proyecto |
+| `]d` / `[d` | Problema siguiente / anterior |
+
+Al guardar se aplican los arreglos de ESLint y el formateador del lenguaje. `Espacio uf` lo apaga o lo enciende.
+
+### Claude
+
+| Atajo | Acción |
+| --- | --- |
+| `Espacio ac` | Abrir o cerrar Claude Code |
+| `Espacio af` | Enfocar Claude |
+| `Espacio as` | Enviar la selección (modo visual) |
+| `Espacio ab` | Añadir el archivo actual |
+| `Espacio aa` / `Espacio ad` | Aceptar / rechazar el cambio propuesto |
+| `Espacio ar` / `Espacio aC` | Retomar sesión / continuar la última |
+| `Ctrl-q` | Salir del terminal a modo normal |
+
+### Git
+
+| Atajo | Acción |
+| --- | --- |
+| `Espacio gg` | Lazygit |
+| `Espacio gd` | Ver mis cambios en un diff |
+| `Espacio gq` | Cerrar el diff |
+| `Espacio gs` | Archivos cambiados |
+| `Espacio gh` | Historial del archivo |
+| `Espacio gw` | Cambiar de worktree |
+| `]h` / `[h` | Cambio siguiente / anterior |
+| `Espacio gp` / `ga` / `gr` | Ver / stage / descartar el cambio (tras `Espacio`) |
+| `Espacio gb` | Blame de la línea |
+
+### Debug
+
+| Atajo | Acción |
+| --- | --- |
+| `Espacio db` / `F9` | Punto de interrupción |
+| `Espacio dc` / `F5` | Iniciar o continuar |
+| `Espacio do` / `F10` | Saltar |
+| `Espacio di` / `F11` | Entrar |
+| `Espacio dO` | Salir de la función |
+| `Espacio de` | Evaluar expresión |
+| `Espacio dt` | Terminar |
+
+Si el proyecto tiene `.vscode/launch.json`, también se usa. En React Native, depura con React Native DevTools (tecla `j` en Metro).
+
+### Tema
+
+El tema es Catppuccin y sigue el modo claro u oscuro de macOS. `Espacio ut` lo cambia a mano y `Espacio uT` vuelve a seguir a macOS.
+
+## Estructura
+
+```text
+init.lua
+lua/config/    opciones, atajos, autocmds, tema y worktrees
+lua/plugins/   ui, snacks, git, editor, completion, lsp, format, java, dap, ai
 ```
 
-After the installing, close the powershell and re open the administrador to continue with this command
-
-``` bash
-choco install neovim -y
-```
-
-
-### Install package manager
-
-Now, we can proceed installing the most famous package manager called Vim Plug once it gets the site. We close the next command using Powershell like administrador
-
-```bash
-iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
-    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim-data/site/autoload/plug.vim" -Force
-```
-
-Once it is done, we use the command to continue with the git installation 
-
-
-### Git installation
-We can skip this step if you have installed Git and you could check with this:
-```bash
-git --version
-```
-
-Wondering why git was installed, to avoid errors in the package managers based on git
-
-Please go to this link to download [Git](https://git-scm.com/)
-
-Click download and then next next next. When it is asking the editor, you select the Vim and ready.
-
-### Set up the editor
-```bash
-C:\Users\UserName\AppData\Local\
-```
-Once you get the folder, you may clone the project or create a file called init.vim to set up from 0.
-
-### Clone the proyecto
-- Installed Node, you can get it here [](https://nodejs.org/es/)
-
-- Move the folder
-
-mkdir nvim
-
-- Browse until the file nvim
-
-```bash
-cd $HOME\AppData\Local\nvim
-```
-
-- After executing this command 
-
-```bash
-git clone https://github.com/manuelduarte077/ninja.nvim .
-```
-- You can finally add neovim to install and compiled packer with this:
-
-```bash
-:PlugInstall
-```
-
-
+Para añadir un servidor de lenguaje, agrégalo a `servers` y a `ensure_installed` en `lua/plugins/lsp.lua`.
