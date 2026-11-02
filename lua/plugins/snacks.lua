@@ -37,6 +37,7 @@ return {
       },
     },
     picker = {
+      layouts = { default = { layout = { backdrop = false } } },
       sources = {
         files = { hidden = true },
         grep = { hidden = true },
